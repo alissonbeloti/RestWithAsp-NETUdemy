@@ -1,0 +1,14 @@
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\bin\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.deps.json
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\bin\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.runtimeconfig.json
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\bin\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.runtimeconfig.dev.json
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\bin\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.dll
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\bin\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.pdb
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\obj\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.csprojAssemblyReference.cache
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\obj\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.csproj.CoreCompileInputs.cache
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\obj\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.RazorAssemblyInfo.cache
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\obj\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.RazorAssemblyInfo.cs
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\obj\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.AssemblyInfoInputs.cache
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\obj\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.AssemblyInfo.cs
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\obj\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.RazorTargetAssemblyInfo.cache
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\obj\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.dll
+E:\estudos\aspNetCore\restfullaspnetdocker\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\RestWithAsp-NETUdemy\obj\Debug\netcoreapp2.1\RestWithAsp-NETUdemy.pdb
