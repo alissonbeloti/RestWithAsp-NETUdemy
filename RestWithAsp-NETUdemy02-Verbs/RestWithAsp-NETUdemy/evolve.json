@@ -1,0 +1,7 @@
+{
+  "Evolve.Driver": "MySql.Data",
+  "Evolve.ConnectionString": "Server=localhost;Port=3306;Database=rest_aspnet_udemy;Uid=root;Pwd=root;SslMode=none",
+  "Evolve.Locations": "db",
+  "Evolve.Command": "migrate",
+  "Evolve.PlaceHolder.table4": "table_4"
+}

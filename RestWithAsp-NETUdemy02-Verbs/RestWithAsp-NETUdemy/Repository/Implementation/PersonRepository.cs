@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using RestWithAsp_NETUdemy.Business;
+using RestWithAsp_NETUdemy.Model;
+using RestWithAsp_NETUdemy.Model.Context;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using RestWithAsp_NETUdemy.Model;
-using RestWithAsp_NETUdemy.Model.Context;
 
-namespace RestWithAsp_NETUdemy.Services.Implementation
+namespace RestWithAsp_NETUdemy.Repository.Implementation
 {
-    public class PersonService : IPersonService
+    public class PersonRepository : IPersonRepository
     {
         private MySqlContext context;
-        public PersonService(MySqlContext context) {
+        public PersonRepository(MySqlContext context) {
             this.context = context;
         }
 

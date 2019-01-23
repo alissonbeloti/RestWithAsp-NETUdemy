@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RestWithAsp_NETUdemy.Business;
 using RestWithAsp_NETUdemy.Model;
 using RestWithAsp_NETUdemy.Services;
 
@@ -9,24 +10,24 @@ namespace RestWithAsp_NETUdemy.Controllers
     [ApiController]
     public class PersonsController : ControllerBase
     {
-        private IPersonService personService;
+        private IPersonBusiness personBusines;
 
-        public PersonsController(IPersonService personService)
+        public PersonsController(IPersonBusiness personBusiness)
         {
-            this.personService = personService;
+            this.personBusines = personBusiness;
         }
         // GET api/values
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(personService.FindAll());
+            return Ok(personBusines.FindAll());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var person = this.personService.FindById(id);
+            var person = this.personBusines.FindById(id);
             if (person == null)
             {
                 return NotFound();
@@ -40,7 +41,7 @@ namespace RestWithAsp_NETUdemy.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Person value)
         {
-            var person = this.personService.Create(value);
+            var person = this.personBusines.Create(value);
             if (person == null)
             {
                 return NotFound();
@@ -55,7 +56,7 @@ namespace RestWithAsp_NETUdemy.Controllers
         [HttpPut("{id}")]
         public IActionResult Put([FromBody] Person value)
         {
-            var person = this.personService.Update(value);
+            var person = this.personBusines.Update(value);
             if (person == null)
             {
                 return NotFound();
@@ -70,7 +71,7 @@ namespace RestWithAsp_NETUdemy.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            personService.Delete(id);
+            personBusines.Delete(id);
             return NoContent();
         }
     }
