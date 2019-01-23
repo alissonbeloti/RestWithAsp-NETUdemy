@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using RestWithAsp_NETUdemy.Services;
+using RestWithAsp_NETUdemy.Services.Implementation;
 
 namespace RestWithAsp_NETUdemy
 {
@@ -26,6 +28,9 @@ namespace RestWithAsp_NETUdemy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            //Injeção de dependencia
+            services.AddScoped<IPersonService, PersonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

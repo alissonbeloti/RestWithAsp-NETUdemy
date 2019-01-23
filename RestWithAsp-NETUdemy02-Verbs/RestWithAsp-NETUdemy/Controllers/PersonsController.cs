@@ -1,45 +1,76 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using RestWithAsp_NETUdemy.Model;
+using RestWithAsp_NETUdemy.Services;
 
 namespace RestWithAsp_NETUdemy.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class PersonsController : ControllerBase
     {
+        private IPersonService personService;
+
+        public PersonsController(IPersonService personService)
+        {
+            this.personService = personService;
+        }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(personService.FindAll());
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            var person = this.personService.FindById(id);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            else {
+                return Ok(person);
+            }
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] Person value)
         {
+            var person = this.personService.Create(value);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(person);
+            }
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put([FromBody] Person value)
         {
+            var person = this.personService.Update(value);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(person);
+            }
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            personService.Delete(id);
+            return NoContent();
         }
     }
 }
