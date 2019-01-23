@@ -32,7 +32,7 @@ namespace RestWithAsp_NETUdemy
             var connection = Configuration["MySqlConnection:MySqlConnectionString"];
             services.AddDbContext<MySqlContext>(options => options.UseMySql(connection));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            services.AddApiVersioning();
             //Injeção de dependencia
             services.AddScoped<IPersonService, PersonService>();
         }
