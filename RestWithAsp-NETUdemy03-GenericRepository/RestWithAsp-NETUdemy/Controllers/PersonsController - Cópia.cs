@@ -3,6 +3,10 @@ using RestWithAsp_NETUdemy.Business;
 using RestWithAsp_NETUdemy.Data.VO;
 using RestWithAsp_NETUdemy.Model;
 using RestWithAsp_NETUdemy.Services;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Collections.Generic;
+using Tapioca.HATEOAS;
+
 
 namespace RestWithAsp_NETUdemy.Controllers
 {
@@ -19,6 +23,11 @@ namespace RestWithAsp_NETUdemy.Controllers
         }
         // GET api/values
         [HttpGet]
+        [SwaggerResponse((200), Type = typeof(List<PersonVO>))]
+        [SwaggerResponse((204))]
+        [SwaggerResponse((400))]
+        [SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get()
         {
             return Ok(personBusines.FindAll());
@@ -26,6 +35,11 @@ namespace RestWithAsp_NETUdemy.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
+        [SwaggerResponse((200), Type = typeof(PersonVO))]
+        [SwaggerResponse((204))]
+        [SwaggerResponse((400))]
+        [SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Get(int id)
         {
             var person = this.personBusines.FindById(id);
@@ -40,6 +54,10 @@ namespace RestWithAsp_NETUdemy.Controllers
 
         // POST api/values
         [HttpPost]
+        [SwaggerResponse((201), Type = typeof(PersonVO))]
+        [SwaggerResponse((400))]
+        [SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Post([FromBody] PersonVO value)
         {
             var person = this.personBusines.Create(value);
@@ -55,6 +73,11 @@ namespace RestWithAsp_NETUdemy.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
+        [SwaggerResponse((201), Type = typeof(PersonVO))]
+        [SwaggerResponse((400))]
+        [SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO value)
         {
             var person = this.personBusines.Update(value);
@@ -70,6 +93,11 @@ namespace RestWithAsp_NETUdemy.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
+        [SwaggerResponse((201))]
+        [SwaggerResponse((400))]
+        [SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Delete(int id)
         {
             personBusines.Delete(id);

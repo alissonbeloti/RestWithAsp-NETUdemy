@@ -6,18 +6,22 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
 using RestWithAsp_NETUdemy.Business;
 using RestWithAsp_NETUdemy.Business.Implementation;
+using RestWithAsp_NETUdemy.HyperMedia;
 using RestWithAsp_NETUdemy.Model.Context;
 using RestWithAsp_NETUdemy.Repository;
 using RestWithAsp_NETUdemy.Repository.Generic;
 using RestWithAsp_NETUdemy.Repository.Implementation;
 using RestWithAsp_NETUdemy.Services.Business;
+using Tapioca.HATEOAS;
 
 namespace RestWithAsp_NETUdemy
 {
@@ -58,7 +62,23 @@ namespace RestWithAsp_NETUdemy
                 }
             }
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //adicionando suporte a xml, por padrão já tinhamos o json
+            services.AddMvc(options => {
+                options.RespectBrowserAcceptHeader = true;
+                options.FormatterMappings.SetMediaTypeMappingForFormat("xml", MediaTypeHeaderValue.Parse("text/xml"));
+                options.FormatterMappings.SetMediaTypeMappingForFormat("json", MediaTypeHeaderValue.Parse("application/json"));
+            })
+            .AddXmlSerializerFormatters()
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            var filterOptions = new HyperMediaFilterOptions();
+            filterOptions.ObjectContentResponseEnricherList.Add(new PersonEnricher());
+            services.AddSingleton(filterOptions);
+
+            services.AddSwaggerGen(o => {
+                o.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "RESTfull API With ASP.Net Core 2.0", Version = "v1" });
+            });
+
             services.AddApiVersioning();
             //Injeção de dependencia
             services.AddScoped<IPersonBusiness, PersonBusiness>();
@@ -79,9 +99,22 @@ namespace RestWithAsp_NETUdemy
             {
                 app.UseHsts();
             }
-
+            
             app.UseHttpsRedirection();
-            app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+            app.UseRewriter(option);
+
+            app.UseMvc(routes => {
+                routes.MapRoute(name: "DefaultApi",
+                    template: "{controller=Values}/{id?}"
+                    );
+            });
         }
     }
 }
