@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RestWithAsp_NETUdemy.Business;
+using RestWithAsp_NETUdemy.Data.VO;
 using RestWithAsp_NETUdemy.Model;
 
 namespace RestWithAsp_NETUdemy.Controllers
@@ -46,7 +47,7 @@ namespace RestWithAsp_NETUdemy.Controllers
 
         // POST api/values
         [HttpPost]
-        public IActionResult Post([FromBody] Book value)
+        public IActionResult Post([FromBody] BookVO value)
         {
             var book = this.bookBusiness.Create(value);
             if (book == null)
@@ -62,7 +63,7 @@ namespace RestWithAsp_NETUdemy.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Put([FromBody] Book value)
+        public IActionResult Put([FromBody] BookVO value)
         {
             var book = this.bookBusiness.Update(value);
             if (book == null)

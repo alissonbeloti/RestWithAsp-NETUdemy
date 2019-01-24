@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RestWithAsp_NETUdemy.Business;
+using RestWithAsp_NETUdemy.Data.Converters;
+using RestWithAsp_NETUdemy.Data.VO;
 using RestWithAsp_NETUdemy.Model;
 using RestWithAsp_NETUdemy.Model.Context;
 using RestWithAsp_NETUdemy.Repository;
@@ -15,16 +17,20 @@ namespace RestWithAsp_NETUdemy.Services.Business
     public class PersonBusiness : IPersonBusiness
     {
         private IRepository<Person> repository;
+        private readonly PersonConverter converter;
+
         public PersonBusiness(IRepository<Person> repository) {
             this.repository = repository;
+            this.converter = new PersonConverter();
         }
 
         public volatile int count;
 
-        public Person Create(Person person)
+        public PersonVO Create(PersonVO person)
         {
-            
-            return repository.Create(person);
+            var personEntity = this.converter.Parse(person);
+            personEntity = repository.Create(personEntity);
+            return this.converter.Parse(personEntity);
         }
 
         public void Delete(long id)
@@ -32,19 +38,21 @@ namespace RestWithAsp_NETUdemy.Services.Business
             repository.Delete(id);
         }
 
-        public List<Person> FindAll()
+        public List<PersonVO> FindAll()
         {
-            return repository.FindAll();
+            return this.converter.ParseList(repository.FindAll());
         }
 
-        public Person FindById(long id)
+        public PersonVO FindById(long id)
         {
-            return repository.FindById(id);
+            return this.converter.Parse(repository.FindById(id));
         }
 
-        public Person Update(Person person)
+        public PersonVO Update(PersonVO person)
         {
-            return repository.Update(person);
+            var personEntity = this.converter.Parse(person);
+            personEntity = repository.Update(personEntity);
+            return this.converter.Parse(personEntity);
         }
     }
 }

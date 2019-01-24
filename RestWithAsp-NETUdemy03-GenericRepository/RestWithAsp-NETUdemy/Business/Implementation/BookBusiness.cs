@@ -1,4 +1,6 @@
-﻿using RestWithAsp_NETUdemy.Model;
+﻿using RestWithAsp_NETUdemy.Data.Converters;
+using RestWithAsp_NETUdemy.Data.VO;
+using RestWithAsp_NETUdemy.Model;
 using RestWithAsp_NETUdemy.Repository.Generic;
 using System;
 using System.Collections.Generic;
@@ -10,17 +12,19 @@ namespace RestWithAsp_NETUdemy.Business.Implementation
     public class BookBusiness: IBookBusiness
 {
         private IRepository<Book> repository;
+        private readonly BookConverter converter;
         public BookBusiness(IRepository<Book> repository)
         {
             this.repository = repository;
+            this.converter = new BookConverter();
         }
 
         public volatile int count;
 
-        public Book Create(Book book)
+        public BookVO Create(BookVO book)
         {
-
-            return repository.Create(book);
+            var bookEntity = converter.Parse(book);
+            return converter.Parse(repository.Create(bookEntity));
         }
 
         public void Delete(long id)
@@ -28,19 +32,20 @@ namespace RestWithAsp_NETUdemy.Business.Implementation
             repository.Delete(id);
         }
 
-        public List<Book> FindAll()
+        public List<BookVO> FindAll()
         {
-            return repository.FindAll();
+            return converter.ParseList(repository.FindAll());
         }
 
-        public Book FindById(long id)
+        public BookVO FindById(long id)
         {
-            return repository.FindById(id);
+            return converter.Parse(repository.FindById(id));
         }
 
-        public Book Update(Book book)
+        public BookVO Update(BookVO book)
         {
-            return repository.Update(book);
+            var bookEntity = converter.Parse(book);
+            return this.converter.Parse(repository.Update(bookEntity));
         }
     }
 }
