@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RestWithAsp_NETUdemy.Business;
 using RestWithAsp_NETUdemy.Data.VO;
 using RestWithAsp_NETUdemy.Model;
@@ -12,6 +13,7 @@ namespace RestWithAsp_NETUdemy.Controllers
 {
     [ApiVersion("1")]
     [Route("api/[controller]/v{version:apiVersion}")]
+    [Authorize("Bearer")]
     [ApiController]
     public class PersonsController : ControllerBase
     {
@@ -47,8 +49,49 @@ namespace RestWithAsp_NETUdemy.Controllers
             {
                 return NotFound();
             }
-            else {
+            else
+            {
                 return Ok(person);
+            }
+        }
+
+        //Query Params
+        [HttpGet("find-by-name")]
+        [SwaggerResponse((200), Type = typeof(List<PersonVO>))]
+        [SwaggerResponse((204))]
+        [SwaggerResponse((400))]
+        [SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult GetByName([FromQuery] string firstName, [FromQuery] string lastName)
+        {
+            var persons = this.personBusines.FindByName(firstName, lastName);
+            if (persons == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(persons);
+            }
+        }
+
+        //Query Params
+        [HttpGet("find-paged/{sortDirection}/{pageSize}/{page}")]
+        [SwaggerResponse((200), Type = typeof(List<PersonVO>))]
+        [SwaggerResponse((204))]
+        [SwaggerResponse((400))]
+        [SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult GetPaged([FromQuery] string name, string sortDirection, int pageSize, int page)
+        {
+            var persons = this.personBusines.FindWithPaged(name, sortDirection, pageSize, page);
+            if (persons == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return OkObjectResult(persons);
             }
         }
 
@@ -79,6 +122,25 @@ namespace RestWithAsp_NETUdemy.Controllers
         [TypeFilter(typeof(HyperMediaFilter))]
         [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult Put([FromBody] PersonVO value)
+        {
+            var person = this.personBusines.Update(value);
+            if (person == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(person);
+            }
+        }
+
+        [HttpPatch("{id}")]
+        [SwaggerResponse((201), Type = typeof(PersonVO))]
+        [SwaggerResponse((400))]
+        [SwaggerResponse((401))]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult Patch([FromBody] PersonVO value)
         {
             var person = this.personBusines.Update(value);
             if (person == null)

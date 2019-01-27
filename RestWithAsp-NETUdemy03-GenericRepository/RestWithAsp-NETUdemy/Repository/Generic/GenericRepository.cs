@@ -10,7 +10,7 @@ namespace RestWithAsp_NETUdemy.Repository.Generic
 {
     public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
-        private MySqlContext context;
+        protected MySqlContext context;
         private DbSet<T> dataSet;
         public GenericRepository(MySqlContext context)
         {
@@ -44,6 +44,16 @@ namespace RestWithAsp_NETUdemy.Repository.Generic
         public T FindById(long id)
         {
             return dataSet.SingleOrDefault(x => x.Id == id);
+        }
+
+        public List<T> FindWhitePaged(string query)
+        {
+            return dataSet.FromSql<T>(query).ToList();
+        }
+
+        public int GetCount(string query)
+        {
+            return dataSet.FromSql<T>(query).Count();
         }
 
         public T Update(T item)

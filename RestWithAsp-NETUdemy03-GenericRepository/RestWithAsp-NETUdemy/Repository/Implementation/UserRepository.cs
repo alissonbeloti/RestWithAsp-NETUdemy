@@ -15,7 +15,7 @@ namespace RestWithAsp_NETUdemy.Repository.Implementation
 
         public User FindByLogin(string login)
         {
-            return context.Users.SingleOrDefault(x => x.Login == login);
+            return context.Users.FirstOrDefault(x => x.Login == login);
         }
     }
 }

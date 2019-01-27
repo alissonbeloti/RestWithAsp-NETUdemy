@@ -12,5 +12,8 @@ namespace RestWithAsp_NETUdemy.Repository.Generic
         void Delete(long id);
 
         bool Exists(long? id);
+
+        List<T> FindWhitePaged(string query);
+        int GetCount(string query);
     }
 }

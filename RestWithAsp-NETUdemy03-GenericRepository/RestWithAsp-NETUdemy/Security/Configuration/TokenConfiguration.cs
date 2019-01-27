@@ -4,6 +4,6 @@
     {
         public string Audience { get; set; }
         public string Issue { get; set; }
-        public string Seconds { get; set; }
+        public double Seconds { get; set; }
     }
 }

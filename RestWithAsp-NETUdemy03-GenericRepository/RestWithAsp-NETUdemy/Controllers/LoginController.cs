@@ -26,14 +26,14 @@ namespace RestWithAsp_NETUdemy.Controllers
         // POST api/values
         [HttpPost]
         [AllowAnonymous]
-        [SwaggerResponse((201), Type = typeof(User))]
+        [SwaggerResponse((201), Type = typeof(UserVO))]
         [SwaggerResponse((400))]
         [SwaggerResponse((401))]
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult Post([FromBody] User value)
+        public IActionResult Post([FromBody] UserVO userVO)
         {
-            if (value == null) return BadRequest();
-            var user = this.loginBusines.FindByLogin(value.Login);
+            if (userVO == null) return BadRequest();
+            var user = this.loginBusines.FindByLogin(userVO);
             if (user == null)
             {
                 return NotFound();
